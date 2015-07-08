@@ -352,8 +352,20 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {
+  // Returns a random integer between min (included) and max (included)
+  // Using Math.round() will give you a non-uniform distribution!
 
+  _.shuffle = function(array) {
+    var result = array.slice(0, array.length);
+    var randy = 0;
+    var swapper;
+    for(var i=0; i < array.length; i ++){
+      randy = Math.floor(Math.random() * (array.length-1 - i + 1)) + i;
+      swapper = result[i];
+      result[i] = result[randy];
+      result[randy] = swapper;
+    }
+    return result;
   };
 
 
