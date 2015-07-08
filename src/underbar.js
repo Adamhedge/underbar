@@ -211,8 +211,22 @@
     var anyTrue = false;
     if (collection.length == 0)
       return false;
+    if (arguments.length < 2){
+      for (var i = 0; i < collection.length; i ++)       
+        if (collection[i] != false && collection[i] != null && collection[i] != undefined)
+          anyTrue = true;
+      if (anyTrue == false) return false;
+        else return true; 
+    }
+    //else return true;
+    var allFalse = [];
+    allFalse = _.map(collection, iterator);
+    for (var i = 0; i < allFalse.length; i ++)
+      if (allFalse[i] != false && allFalse[i] != null && allFalse[i] != undefined)
+        anyTrue = true;
+    if (anyTrue == false) return false;
     else return true;
-    //_.every(collection, );
+    //return !(_.every(collection, iterator));
   };
 
 
@@ -320,6 +334,11 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = [];
+    if (arguments.length > 2)
+      for (var i = 2; i < arguments.length; i ++)
+        args.push(arguments[i]);
+    setTimeout(function(){func.apply(this, args);}, wait);
   };
 
 
@@ -334,6 +353,7 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+
   };
 
 
